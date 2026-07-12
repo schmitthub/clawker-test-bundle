@@ -1,0 +1,3 @@
+description: >-
+  UAT marker stack (user scope): drops ~/.clawker-uat-greet in the container
+  user's home so a built image can prove user-scope fragments render.

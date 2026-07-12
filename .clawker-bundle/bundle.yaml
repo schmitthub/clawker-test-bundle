@@ -1,0 +1,7 @@
+namespace: ajschmitt
+name: test-bundle
+version: 0.1.0
+description: Clawker UAT test bundle — marker stacks for verifying the bundle install model end to end.
+author: Andrew Schmitt
+repository: https://github.com/schmitthub/clawker-test-bundle
+license: MIT
