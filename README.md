@@ -12,7 +12,7 @@ Declare and build it:
 ```yaml
 bundles:
   - url: https://github.com/schmitthub/clawker-test-bundle.git
-    ref: v0.2.1
+    ref: v0.2.2
 ```
 
 ```bash
