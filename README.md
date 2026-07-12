@@ -4,8 +4,8 @@ UAT fixture for the clawker bundle install model. Ships two marker stacks:
 
 | Component | Address | Proof in a built image |
 |-----------|---------|------------------------|
-| `stacks/hello` (root scope) | `ajschmitt.test-bundle.hello` | `/usr/local/share/clawker-uat/hello` + `hello-uat` on PATH |
-| `stacks/greet` (user scope) | `ajschmitt.test-bundle.greet` | `~/.clawker-uat-greet` |
+| `stacks/hello` (root scope) | `schmitthub.test-bundle.hello` | `/usr/local/share/clawker-uat/hello` + `hello-uat` on PATH |
+| `stacks/greet` (user scope) | `schmitthub.test-bundle.greet` | `~/.clawker-uat-greet` |
 
 Declare it:
 
@@ -15,5 +15,5 @@ bundles:
     ref: v0.1.0
 
 build:
-  stacks: [ajschmitt.test-bundle.hello, ajschmitt.test-bundle.greet]
+  stacks: [schmitthub.test-bundle.hello, schmitthub.test-bundle.greet]
 ```

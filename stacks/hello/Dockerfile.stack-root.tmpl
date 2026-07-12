@@ -4,7 +4,7 @@ RUN if [ -f /usr/local/share/clawker-uat/hello ]; then \
       echo "clawker stack hello: marker already present — skipping"; \
     else \
       mkdir -p /usr/local/share/clawker-uat && \
-      echo "ajschmitt.test-bundle.hello v0.1.0" > /usr/local/share/clawker-uat/hello && \
+      echo "schmitthub.test-bundle.hello v0.1.0" > /usr/local/share/clawker-uat/hello && \
       printf '#!/bin/sh\ncat /usr/local/share/clawker-uat/hello\n' > /usr/local/bin/hello-uat && \
       chmod +x /usr/local/bin/hello-uat ; \
     fi

@@ -1,4 +1,4 @@
-namespace: ajschmitt
+namespace: schmitthub
 name: test-bundle
 version: 0.1.0
 description: Clawker UAT test bundle — marker stacks for verifying the bundle install model end to end.
