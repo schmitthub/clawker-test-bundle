@@ -1,6 +1,6 @@
 namespace: schmitthub
 name: test-bundle
-version: 0.2.0
+version: 0.2.1
 description: Clawker UAT test bundle — an opencode harness for verifying the bundle install model end to end.
 author: Andrew Schmitt
 repository: https://github.com/schmitthub/clawker-test-bundle

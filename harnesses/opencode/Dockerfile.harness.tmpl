@@ -6,13 +6,13 @@
 ARG OPENCODE_VERSION={{.HarnessVersion}}
 # Canonical standalone installer: downloads the platform release binary
 # (bun-compiled, self-contained — no node/bun at runtime). VERSION pins
-# the release; OPENCODE_INSTALL_DIR lands the binary in ~/.local/bin
-# (already on the image ENV PATH); --no-modify-path keeps the installer
-# out of the shell rc files clawker manages.
+# the release; --no-modify-path keeps the installer out of the shell rc
+# files clawker manages. The script's install dir is hardcoded to
+# ~/.opencode/bin (it accepts no override), so the binary is symlinked
+# into ~/.local/bin — already on the image ENV PATH, where CMD finds it.
 RUN curl -fsSL https://opencode.ai/install | \
-      VERSION=${OPENCODE_VERSION} \
-      OPENCODE_INSTALL_DIR=/home/${USERNAME}/.local/bin \
-      bash -s -- --no-modify-path
+      VERSION=${OPENCODE_VERSION} bash -s -- --no-modify-path && \
+    ln -s /home/${USERNAME}/.opencode/bin/opencode /home/${USERNAME}/.local/bin/opencode
 {{- end}}
 
 {{define "block_6" -}}
