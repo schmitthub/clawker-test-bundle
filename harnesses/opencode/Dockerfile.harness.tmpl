@@ -1,0 +1,20 @@
+{{/*
+  OpenCode harness — fills the master Dockerfile.tmpl block slots.
+*/}}
+
+{{define "block_4" -}}
+ARG OPENCODE_VERSION={{.HarnessVersion}}
+# Canonical standalone installer: downloads the platform release binary
+# (bun-compiled, self-contained — no node/bun at runtime). VERSION pins
+# the release; OPENCODE_INSTALL_DIR lands the binary in ~/.local/bin
+# (already on the image ENV PATH); --no-modify-path keeps the installer
+# out of the shell rc files clawker manages.
+RUN curl -fsSL https://opencode.ai/install | \
+      VERSION=${OPENCODE_VERSION} \
+      OPENCODE_INSTALL_DIR=/home/${USERNAME}/.local/bin \
+      bash -s -- --no-modify-path
+{{- end}}
+
+{{define "block_6" -}}
+CMD ["opencode"]
+{{- end}}

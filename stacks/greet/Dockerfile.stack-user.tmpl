@@ -1,6 +1,0 @@
-# UAT marker (user scope). Guarded: skips when the marker already exists.
-RUN if [ -f "$HOME/.clawker-uat-greet" ]; then \
-      echo "clawker stack greet: marker already present — skipping"; \
-    else \
-      echo "schmitthub.test-bundle.greet v0.1.0" > "$HOME/.clawker-uat-greet" ; \
-    fi

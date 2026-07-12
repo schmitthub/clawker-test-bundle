@@ -1,0 +1,38 @@
+# OpenCode harness — anomalyco/opencode, installed via the canonical
+# standalone installer (https://opencode.ai/install). The binary is a
+# bun-compiled self-contained executable: no node or bun at runtime, so
+# this harness declares no stack dependencies.
+
+# Versions resolve from npm (`opencode-ai` tracks the release binaries);
+# the installer accepts the same version string via its VERSION env.
+version:
+  resolver: npm
+  package: opencode-ai
+
+# Persisted dirs (XDG defaults under the container home):
+#   config — ~/.config/opencode (opencode.json, global AGENTS.md)
+#   data   — ~/.local/share/opencode (sessions + auth.json, so a login
+#            survives container restarts)
+volumes:
+  - name: config
+    path: .config/opencode
+  - name: data
+    path: .local/share/opencode
+
+staging:
+  # opencode.json deliberately NOT copied: it can embed host-path-keyed
+  # state (instructions file paths, {file:...} references, local MCP
+  # server command paths) that dangles in the container — opencode
+  # regenerates defaults on first run. auth.json NOT staged either —
+  # credentials never travel; log in inside the container. Only the
+  # user's GLOBAL instructions come along.
+  copy:
+    - src: ${OPENCODE_CONFIG_DIR:-~/.config/opencode}/AGENTS.md
+      dest: .config/opencode/AGENTS.md
+
+# Runtime floor only — install runs at image build time on the host
+# daemon, outside the agent network namespace. Minimal by design: widen
+# only from observed blocked traffic, never preemptively.
+egress:
+  - dst: models.dev         # provider catalog fetched at startup
+  - dst: api.anthropic.com  # API-key auth inference (basic session)

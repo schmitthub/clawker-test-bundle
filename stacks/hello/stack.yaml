@@ -1,4 +1,0 @@
-description: >-
-  UAT marker stack (root scope): drops /usr/local/share/clawker-uat/hello
-  and a hello-uat script on PATH so a built image can prove the bundled
-  stack rendered.
