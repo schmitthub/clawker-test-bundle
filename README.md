@@ -23,3 +23,5 @@ clawker build -t schmitthub.test-bundle.opencode
 Proof in a built image: `opencode` on PATH (`~/.local/bin/opencode`),
 `CMD ["opencode"]`, and the two harness volumes mounted under the
 container home.
+
+UAT: unpinned default-branch tracking probe (2026-07-13).
