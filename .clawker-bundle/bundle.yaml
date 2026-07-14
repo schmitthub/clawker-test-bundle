@@ -1,6 +1,6 @@
 namespace: schmitthub
 name: test-bundle
-version: 0.3.0
+version: 0.4.0
 description: Working example clawker bundle — claude, codex, and opencode harnesses to fork from.
 author: Andrew Schmitt
 repository: https://github.com/schmitthub/clawker-test-bundle

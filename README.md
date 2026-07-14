@@ -20,7 +20,7 @@ Declare and build:
 ```yaml
 bundles:
   - url: https://github.com/schmitthub/clawker-test-bundle.git
-    ref: v0.3.0
+    ref: v0.4.0
 ```
 
 ```bash
@@ -33,7 +33,7 @@ clawker build -t schmitthub.test-bundle.codex
 ```
 harnesses/<name>/
 ├── harness.yaml             # manifest: version resolver, stacks, volumes,
-│                            # seeds, staging, egress floor
+│                            # seeds, staging, managed_prompt, egress floor
 ├── Dockerfile.harness.tmpl  # template blocks composed into clawker's
 │                            # master Dockerfile (install steps, ENV, CMD)
 └── assets/                  # optional files staged into the build context
