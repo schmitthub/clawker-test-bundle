@@ -1,7 +1,7 @@
 namespace: schmitthub
 name: test-bundle
-version: 0.2.2
-description: Clawker UAT test bundle — an opencode harness for verifying the bundle install model end to end.
+version: 0.3.0
+description: Working example clawker bundle — claude, codex, and opencode harnesses to fork from.
 author: Andrew Schmitt
 repository: https://github.com/schmitthub/clawker-test-bundle
 license: MIT
