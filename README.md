@@ -1,7 +1,8 @@
 # clawker-test-bundle
 
 A working example [clawker](https://github.com/schmitthub/clawker) bundle —
-fork this repo to build your own. It ships three harnesses:
+fork this repo to build your own. It ships three harnesses and mirrors of
+all eight of clawker's embedded stacks:
 
 | Component | Address | What it does |
 |-----------|---------|--------------|
@@ -15,12 +16,23 @@ of every harness surface (stacks, volumes, seeds + assets, staging with
 `json_keys`/`json_rewrites`, path-scoped egress, both npm and github-release
 version resolvers). The `opencode` harness shows the minimal shape.
 
+The `stacks/` directory mirrors all eight embedded stacks — `go`, `node`,
+`python`, `rust`, `java`, `ruby`, `cpp`, and `dotnet` — as
+`schmitthub.test-bundle.<name>`. Together they demonstrate every stack
+pattern: root-scope and user-scope fragments (`node` ships both),
+checksum-verified official tarballs (`go`), GPG-verified installs (`node`),
+`curl | sh` installer scripts (`python`, `rust`, `dotnet`), plain apt
+toolchains (`java`, `ruby`, `cpp`), shared world-writable state dirs
+(`go`'s GOPATH, `ruby`'s GEM_HOME), version-pin ARGs over floating
+channels, and the self-guard convention (every fragment skips itself when
+the image already provides the tool).
+
 Declare and build:
 
 ```yaml
 bundles:
   - url: https://github.com/schmitthub/clawker-test-bundle.git
-    ref: v0.1.0
+    ref: v0.1.1
 ```
 
 ```bash
@@ -39,6 +51,24 @@ harnesses/<name>/
 └── assets/                  # optional files staged into the build context
                              # (referenced by seeds: and COPY)
 ```
+
+## Anatomy of a stack
+
+```
+stacks/<name>/
+├── stack.yaml                  # manifest: description
+├── Dockerfile.stack-root.tmpl  # root-scope install steps (system-wide
+│                               # toolchains), rendered into the base image
+└── Dockerfile.stack-user.tmpl  # user-scope install steps (per-user version
+                                # managers like nvm/rustup) — ship one
+                                # fragment or both
+```
+
+Fragments are Go templates with one variable, `{{.BuildKitEnabled}}`, for
+emitting `--mount=type=cache` apt cache mounts only when BuildKit renders
+the build. Every fragment self-guards: it skips its install when the image
+already provides the tool, so declaring a stack that the base already
+carries is always safe.
 
 Planned additions (ongoing): a `pi` harness and the remaining embedded
 components.
