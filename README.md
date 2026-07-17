@@ -1,8 +1,8 @@
 # clawker-test-bundle
 
 A working example [clawker](https://github.com/schmitthub/clawker) bundle —
-fork this repo to build your own. It ships three harnesses and mirrors of
-all eight of clawker's embedded stacks:
+fork this repo to build your own. It ships three harnesses and eight
+stacks:
 
 | Component | Address | What it does |
 |-----------|---------|--------------|
@@ -10,29 +10,29 @@ all eight of clawker's embedded stacks:
 | `harnesses/codex` | `schmitthub.test-bundle.codex` | [Codex CLI](https://github.com/openai/codex) via the canonical installer (version resolved from GitHub release tags `rust-v*`). Self-contained binary — no stack. Persists `~/.codex` as a volume, stages host global `AGENTS.md` + prompts, and floors egress at the OpenAI API/auth domains with `chatgpt.com` path-scoped to the codex backend |
 | `harnesses/opencode` | `schmitthub.test-bundle.opencode` | [OpenCode](https://opencode.ai) via the canonical installer (version resolved from npm `opencode-ai`). Persists `~/.config/opencode` + `~/.local/share/opencode` as volumes, stages the host's global `AGENTS.md`, and floors egress at `models.dev` + `api.anthropic.com` |
 
-The `claude` and `codex` harnesses mirror clawker's embedded floor harnesses —
-they are the reference implementations, kept here as complete worked examples
-of every harness surface (stacks, volumes, seeds + assets, staging with
-`json_keys`/`json_rewrites`, path-scoped egress, both npm and github-release
-version resolvers). The `opencode` harness shows the minimal shape.
+The `claude` and `codex` harnesses are patterned on clawker's embedded
+harnesses — complete worked examples of every harness surface (stacks,
+volumes, seeds + assets, staging with `json_keys`/`json_rewrites`,
+path-scoped egress, both npm and github-release version resolvers). The
+`opencode` harness shows the minimal shape.
 
-The `stacks/` directory mirrors all eight embedded stacks — `go`, `node`,
-`python`, `rust`, `java`, `ruby`, `cpp`, and `dotnet` — as
-`schmitthub.test-bundle.<name>`. Together they demonstrate every stack
-pattern: root-scope and user-scope fragments (`node` ships both),
-checksum-verified official tarballs (`go`), GPG-verified installs (`node`),
-`curl | sh` installer scripts (`python`, `rust`, `dotnet`), plain apt
-toolchains (`java`, `ruby`, `cpp`), shared world-writable state dirs
-(`go`'s GOPATH, `ruby`'s GEM_HOME), version-pin ARGs over floating
-channels, and the self-guard convention (every fragment skips itself when
-the image already provides the tool).
+The `stacks/` directory ships eight example stacks — `go`, `node`,
+`python`, `rust`, `java`, `ruby`, `cpp`, and `dotnet`, addressed as
+`schmitthub.test-bundle.<name>` — patterned on clawker's embedded ones.
+Together they demonstrate every stack pattern: root-scope and user-scope
+fragments (`node` ships both), checksum-verified official tarballs (`go`),
+GPG-verified installs (`node`), `curl | sh` installer scripts (`python`,
+`rust`, `dotnet`), plain apt toolchains (`java`, `ruby`, `cpp`), shared
+world-writable state dirs (`go`'s GOPATH, `ruby`'s GEM_HOME), version-pin
+ARGs over floating channels, and the self-guard convention (every fragment
+skips itself when the image already provides the tool).
 
 Declare and build:
 
 ```yaml
 bundles:
   - url: https://github.com/schmitthub/clawker-test-bundle.git
-    ref: v0.1.1
+    ref: v0.1.2
 ```
 
 ```bash
