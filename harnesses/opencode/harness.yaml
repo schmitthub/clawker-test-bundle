@@ -18,6 +18,8 @@ volumes:
     path: .config/opencode
   - name: data
     path: .local/share/opencode
+  - name: agents
+    path: .agents
 
 staging:
   # opencode.json deliberately NOT copied: it can embed host-path-keyed
